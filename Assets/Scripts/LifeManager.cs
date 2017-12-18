@@ -15,26 +15,45 @@ public class LifeManager : MonoBehaviour
     [Header("Debug")]
     public bool m_useDebugLog;
 
-    [Range(0, 1f)]
-    [SerializeField]
+    [Header("Maximum life")]
+    public int m_maxLife;
+    
+    public int MaxLife
+    {
+        get { return m_maxLife; }
+        set
+        {
+            int oldMaxValue = m_maxLife;
+            int newMaxValue = value;
+
+            if (oldMaxValue != newMaxValue)
+            {
+                m_maxLife = value;
+                m_life = m_maxLife;
+            }
+        }
+    }
+
+    [Range(0, 100)]
+    //[SerializeField]
     [Header("Life")]
     [Tooltip("Life of the target between 0-1 percent")]
     /// Life of the target between 0-1 percent.          
-    private float m_life;
+    private int m_life;
 
-    public float Life
+    public int Life
     {
         get { return m_life; }
         set
         {
-            float oldValue = m_life;
-            float newValue = value;
+            int oldValue = m_life;
+            int newValue = value;
 
             if (oldValue != newValue)
             {
                 m_life = value;
 
-                value = Mathf.Clamp01(value);
+                value = Mathf.Clamp(value, 0, m_maxLife);
                 if (oldValue == 0 && newValue > 0)
                 {
                     m_onRez.Invoke();
@@ -64,7 +83,7 @@ public class LifeManager : MonoBehaviour
 
     private void Reset()
     {
-        m_life = 0f;
+        m_life = 0;
     }
 
     #endregion
