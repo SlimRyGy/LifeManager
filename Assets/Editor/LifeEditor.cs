@@ -9,7 +9,6 @@ public class LifeEditor : Editor
     GUIStyle m_labelStyle           = new GUIStyle();
     GUIStyle m_rezButtonStyle       = new GUIStyle();
     GUIStyle m_dieButtonStyle       = new GUIStyle();
-    GUIStyle m_stateButtonStyle     = new GUIStyle();
     GUIStyle m_damageButtonStyle    = new GUIStyle(); 
    
     
